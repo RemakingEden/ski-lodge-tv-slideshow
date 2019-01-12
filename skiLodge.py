@@ -6,8 +6,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
-url1 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
-url2 = 'http://niseko.nadare.info/'
+url1 = 'http://niseko.nadare.info/'
+url2 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
 url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
 intervalAmount = 30
 chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
@@ -39,6 +39,7 @@ def switch_tabs(interval):
 	while True:
 		driver.switch_to.window("tab1")
 		time.sleep(interval)
+		driver.refresh()
 		driver.switch_to.window("tab2")
 		time.sleep(interval)
 		driver.switch_to.window("tab3")
