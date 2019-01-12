@@ -1,3 +1,5 @@
+#!usr/bin/python3
+
 """Script to show weather. avalanche info and lift status in the morning and ski films in the evening"""
 
 import sys
