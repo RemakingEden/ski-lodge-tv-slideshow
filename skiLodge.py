@@ -7,12 +7,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import time
+import schedule
 
 url1 = 'http://niseko.nadare.info/'
 url2 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
 url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
 intervalAmount = 30
 chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
+timeToSwitch = "10:00"
 
 options = Options()
 options.add_argument("--kiosk")
@@ -42,23 +44,28 @@ def switch_tabs(interval):
 		driver.switch_to.window("tab1")
 		time.sleep(interval)
 		driver.refresh()
+		change_program_set_time(timeToSwitch)
 		driver.switch_to.window("tab2")
 		time.sleep(interval)
+		change_program_set_time(timeToSwitch)
 		driver.switch_to.window("tab3")
 		time.sleep(interval)
+		change_program_set_time(timeToSwitch)
 	return
-
-def change_program_set_time(time):
-	'''change programs at a specific time'''
-	pass
 
 def open_play_VLC():
 	'''Open and play a VLC playlist'''
-	pass
+	return
 
 def screen_on_off():
 	'''checks if the monitor is off or on and pause the program if off'''
 	pass
+
+def change_program_set_time(changeTime):
+	'''change programs at a specific time'''
+	schedule.every().day.at(changeTime).do(open_play_VLC)
+	schedule.run_pending()
+	return
 
 def main():
     """Main entry point for the script."""
