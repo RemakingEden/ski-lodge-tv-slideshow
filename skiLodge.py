@@ -17,7 +17,7 @@ url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
 intervalAmount = 30
 chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
 timeToSwitch = "10:00"
-vlcPlaylist = "/home/pi/Movies/playlist"
+vlcPlaylistDirectory = "/home/pi/Movies/playlist"
 
 options = Options()
 options.add_argument("--kiosk")
@@ -57,7 +57,7 @@ def switch_tabs(interval):
 
 def open_play_VLC():
 	'''Open and play a VLC playlist'''
-	os.system("vlc %a -f --no-audio" % vlcPlaylist)
+	os.system("vlc --LZ %a -f --no-audio" % vlcPlaylistDirectory)
 	return
 
 def screen_on_off():
