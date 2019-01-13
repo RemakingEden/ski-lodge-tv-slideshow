@@ -8,19 +8,21 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 import schedule
+import os
+import vlc
 
 url1 = 'http://niseko.nadare.info/'
 url2 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
 url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
 intervalAmount = 30
 chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
-timeToSwitch = "10:00"
+timeToSwitch = "10:55"
+vlcPlaylist = "/home/denada/Desktop/fg.mkv" #"/home/pi/Movies/playlist"
 
 options = Options()
 options.add_argument("--kiosk")
 options.add_argument('disable-infobars')
 driver = webdriver.Chrome(chromeDriverLocation, chrome_options=options)
-
 
 def open_WLA (url1,url2,url3):
 	'''opens the links for weather, lift status and avalanche'''
@@ -55,7 +57,8 @@ def switch_tabs(interval):
 
 def open_play_VLC():
 	'''Open and play a VLC playlist'''
-	return
+	os.system("vlc %a -f --no-audio" % vlcPlaylist)
+	pass
 
 def screen_on_off():
 	'''checks if the monitor is off or on and pause the program if off'''
