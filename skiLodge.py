@@ -16,8 +16,8 @@ url2 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
 url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
 intervalAmount = 30
 chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
-timeToSwitch = "10:55"
-vlcPlaylist = "/home/denada/Desktop/fg.mkv" #"/home/pi/Movies/playlist"
+timeToSwitch = "10:00"
+vlcPlaylist = "/home/pi/Movies/playlist"
 
 options = Options()
 options.add_argument("--kiosk")
