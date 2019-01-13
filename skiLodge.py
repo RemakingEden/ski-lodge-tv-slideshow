@@ -58,7 +58,7 @@ def switch_tabs(interval):
 def open_play_VLC():
 	'''Open and play a VLC playlist'''
 	os.system("vlc %a -f --no-audio" % vlcPlaylist)
-	pass
+	return
 
 def screen_on_off():
 	'''checks if the monitor is off or on and pause the program if off'''
