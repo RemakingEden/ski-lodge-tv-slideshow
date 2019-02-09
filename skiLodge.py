@@ -9,15 +9,14 @@ from selenium.webdriver.common.action_chains import ActionChains
 import time
 import schedule
 import os
-import vlc
 
 url1 = 'http://niseko.nadare.info/'
 url2 = 'https://www.windy.com/?43.044,141.348,5,i:pressure,p:off'
 url3 = 'https://www.niseko.ne.jp/en/niseko-lift-status/'
-intervalAmount = 30
-chromeDriverLocation = "/etc/chromium-browser/chromeDriver/chromedriver"
-timeToSwitch = "10:00"
-vlcPlaylistDirectory = "/home/pi/Movies/playlist"
+intervalAmount = 45
+chromeDriverLocation = "/usr/lib/chromium-browser/chromedriver"
+timeToSwitch = "09:00"
+vlcPlaylistDirectory = "/home/pi/snowFilms"
 
 options = Options()
 options.add_argument("--kiosk")
@@ -30,6 +29,8 @@ def open_WLA (url1,url2,url3):
 	driver.execute_script("window.open('about:blank', 'tab1');")
 	driver.switch_to.window("tab1")
 	driver.get(url1)
+	element = driver.find_element_by_id("center")
+	driver.execute_script("arguments[0].scrollIntoView();", element)
 	driver.execute_script("window.open('about:blank', 'tab2');")
 	driver.switch_to.window("tab2")
 	driver.get(url2)
@@ -38,6 +39,7 @@ def open_WLA (url1,url2,url3):
 	driver.get(url3)
 	element = driver.find_element_by_id("liftArea")
 	driver.execute_script("arguments[0].scrollIntoView();", element)
+
 	return
 
 def switch_tabs(interval):
@@ -51,13 +53,15 @@ def switch_tabs(interval):
 		time.sleep(interval)
 		change_program_set_time(timeToSwitch)
 		driver.switch_to.window("tab3")
+		driver.execute_script("document.body.style.zoom='0.97'")
 		time.sleep(interval)
+		driver.refresh()
 		change_program_set_time(timeToSwitch)
 	return
 
 def open_play_VLC():
 	'''Open and play a VLC playlist'''
-	os.system("vlc --LZ %a -f --no-audio" % vlcPlaylistDirectory)
+	os.system("cvlc -L -Z %a -f --no-audio" % vlcPlaylistDirectory)
 	return
 
 def screen_on_off():
